@@ -1,0 +1,88 @@
+## Agregar el locale en español
+
+import Dates
+
+"""
+    SPANISH_GT::Dates.DateLocale
+
+Prototype of Theme with spanish locale for Makie plots and some fonts
+A DateLocale for Spanish (Guatemala) with month and day names in Spanish.
+"""
+SPANISH_GT = Dates.DateLocale(
+    ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+    ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"],
+)
+
+Dates.LOCALES["spanish"] = SPANISH_GT
+
+
+## Makie theme for the plots
+
+BG_GREEN = colorant"#213830"
+BG_LIGHTGREEN = colorant"#2a5446"
+BG_RED = colorant"#781f0e"
+BG_YELLOW = colorant"#c4922b"
+BG_BONEWHITE = colorant"#c0c1b5"
+BG_GRAY = colorant"#9d9e9f"
+BG_SKINBROWN = colorant"#bca580"
+WONG_COLORS = Makie.wong_colors()
+
+"""
+    die_theme::Makie.Theme
+
+A Makie theme for DIE plots with specific fonts and styles.
+"""
+die_theme = Makie.Theme(
+    size = (950, 750),
+    fontsize = 18,
+    grid = true,
+    fonts = (;
+        regular = "Libre Franklin",
+        italic = "Petrona",
+    ),
+    # palette = (;
+    #     # Order of colors
+    #     color = [
+    #         BG_GREEN,
+    #         BG_YELLOW,
+    #         BG_RED,
+    #         BG_BONEWHITE,
+    #         BG_GRAY,
+    #         BG_LIGHTGREEN,
+    #         BG_SKINBROWN,
+    #         WONG_COLORS...,
+    #     ]
+    # ),
+    # cycle = [:color, :marker],
+    Axis = (;
+        titlesize = 20,
+        xticklabelsize = 18,
+        yticklabelsize = 18,
+        xlabelsize = 20,
+        ylabelsize = 20,
+        xticklabelrotation = pi / 4,
+        # Axis borders
+        leftspinevisible = false,
+        rightspinevisible = false,
+        topspinevisible = false,
+        bottomspinevisible = true,
+        # Grid
+        xgridvisible = false,
+    ),
+    Legend = (;
+        framevisible = false,
+        labelsize = 16,
+    ),
+    Lines = (;
+        linewidth = 3,
+    ),
+    Text = (;
+        fontsize = 18,
+    ),
+    # For the bottom source labels
+    Label = (;
+        fontsize = 14,
+    ),
+)
