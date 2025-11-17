@@ -11,7 +11,7 @@ using Dates
 
 # Export makie theme
 export die_theme
-include("themes/makie_theme.jl")
+include("themes/initial_die_theme.jl")
 
 
 end
