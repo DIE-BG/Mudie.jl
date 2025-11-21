@@ -1,4 +1,4 @@
-##Locale for Spanish (Guatemala) dates in Makie plots
+## Locale for Spanish (Guatemala) dates in Makie plots
 
 import Dates
 
@@ -14,3 +14,6 @@ SPANISH_GT = Dates.DateLocale(
     ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
     ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"],
 )
+
+# Set the locale in Dates module
+Dates.LOCALES["spanish"] = SPANISH_GT

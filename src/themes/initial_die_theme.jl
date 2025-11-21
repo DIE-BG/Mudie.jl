@@ -1,8 +1,3 @@
-import Dates
-include("../locale.jl")
-
-Dates.LOCALES["spanish"] = SPANISH_GT
-
 ## Makie theme for the plots
 
 BG_GREEN = colorant"#213830"
