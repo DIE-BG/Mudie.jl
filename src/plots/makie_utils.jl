@@ -4,7 +4,7 @@
         y::AbstractArray{<:Union{Missing, Real}}; 
         figure = (;),
         axis = (;),
-        lines = (;),
+        kwargs...,
     )
 
 Plot a time series as a continuous line on a new Figure and Axis.
@@ -59,15 +59,15 @@ end
 
 Add a time-series line to an existing Axis.
 
-Arguments
+## Arguments
 - ax: the Axis to draw into.
 - dates: array of Date values for the x axis.
 - y: array of values (Real or Missing) for the y axis.
 
-Keyword arguments
+## Keyword arguments
 - Any keyword arguments are forwarded to `lines!()` (e.g., color, linewidth, linestyle).
 
-Behavior
+## Behavior
 - Dates are converted to plotting coordinates with `datetime2rata`.
 - Returns the Lines object produced by `lines!()`.
 """

@@ -1,7 +1,7 @@
 name = "Mudie"
 uuid = "4d8691f9-d7cd-4649-8446-b9e4aa9b174c"
-version = "0.1.1"
-authors = ["DIE"]
+version = "0.1.2"
+authors = ["DIE-BG contributors"]
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
