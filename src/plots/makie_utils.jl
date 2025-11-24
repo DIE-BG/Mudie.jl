@@ -2,7 +2,6 @@
     tslines(
         dates::AbstractArray{<:Date},
         y::AbstractArray{<:Union{Missing, Real}}; 
-        step::Int = 12,
         figure = (;),
         axis = (;),
         lines = (;),
@@ -10,50 +9,43 @@
 
 Plot a time series as a continuous line on a new Figure and Axis.
 
-Arguments
+## Arguments
 - dates: array of Date values for the x axis.
 - y: array of values (Real or Missing) for the y axis.
 
-Keyword arguments
-- step: integer step for setting x tick labels (every `step`-th tick). Default 12.
+## Keyword arguments
 - figure: keyword arguments forwarded to Figure().
 - axis: keyword arguments forwarded to Axis().
-- lines: keyword arguments forwarded to lines!().
+- kwargs: keyword arguments forwarded to lines!().
 
-Behavior
+## Behavior
 - Dates are converted to plotting coordinates with `datetime2rata`.
 - Tick labels are formatted with `Dates.format(..., "u-yyyy", locale="spanish")` and placed every `step` entries.
 - Returns `(fig, ax, l)` where `fig` is the Figure, `ax` is the Axis, and `l` is the plotted Lines object.
+
+See also [`tslines!()`](@ref).
 """
 function tslines(
-    dates::AbstractArray{<:Date}, 
-    y::AbstractArray{<:Union{Missing, Real}}; 
-    step::Int = 12,
-    figure = (;),
-    axis = (;),
-    lines = (;),
-)
-    # Dates
-    numdates = datetime2rata.(dates)
-    strdates = Dates.format.(dates, "u-yyyy", locale="spanish")
-
-    return with_theme(die_theme) do 
-        # Create figure and axis with date ticks
-        fig = Figure(; figure...)
-        ax = Axis(
-            fig[1, 1];
-            xticks = (numdates[1:step:end], strdates[begin:step:end]),
-            axis...,
-        )
-        # Plot the line
-        l1 =lines!(
-            ax,
-            numdates,
-            y;
-            lines...,
-        )
-        return fig, ax, l1
-    end
+        dates::AbstractArray{<:Date},
+        y::AbstractArray{<:Union{Missing, Real}};
+        figure = (;),
+        axis = (;),
+        kwargs...,
+    )
+    # Create figure and axis with date ticks
+    fig = Figure(; figure...)
+    ax = Axis(
+        fig[1, 1];
+        axis...,
+    )
+    # Plot the line
+    l1 = tslines!(
+        ax,
+        dates,
+        y;
+        kwargs...,
+    )
+    return fig, ax, l1
 end
 
 
@@ -80,11 +72,11 @@ Behavior
 - Returns the Lines object produced by `lines!()`.
 """
 function tslines!(
-    ax::Axis,
-    dates::AbstractArray{<:Date},
-    y::AbstractArray{<:Union{Missing, Real}}; 
-    kwargs...
-)
+        ax::Axis,
+        dates::AbstractArray{<:Date},
+        y::AbstractArray{<:Union{Missing, Real}};
+        kwargs...
+    )
     # Dates
     numdates = datetime2rata.(dates)
     # Plot the line
@@ -94,6 +86,8 @@ function tslines!(
         y;
         kwargs...,
     )
+    # Set date ticks if not already set
+    dateticks!(ax, dates)
     return l
 end
 
@@ -117,9 +111,10 @@ function dateticks!(
     # Create dates for the X-axis
     date_ticks = first(dates):step:last(dates)
     numdates = datetime2rata.(date_ticks)
-    strdates = Dates.format.(date_ticks, format, locale="spanish")
+    strdates = Dates.format.(date_ticks, format, locale = "spanish")
     # Set them for the current axis
     ax.xticks = (numdates, strdates)
+    ax.xticklabelrotation = π / 4
     return numdates, strdates
 end
 
@@ -160,5 +155,5 @@ function dateszoom!(
         datetime2rata(datestart),
         datetime2rata(dateend),
     )
-    return 
+    return
 end
