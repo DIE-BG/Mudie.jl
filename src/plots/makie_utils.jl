@@ -96,10 +96,10 @@ end
 """
     dateticks!(
         ax = current_axis(),
-        dates::AbstractArray{<:Date} = Date(2001, 1):Month(12):Date(2050, 1);
+        dates::StepRange{Date, R} = Date(2001, 1):Month(12):Date(2050, 1);
         step::DatePeriod = Month(12),
         format::AbstractString = "u-yyyy",
-    )
+    ) where {R <: DatePeriod}
 Sets the current (or specified) axis to be DateTime with given steps and format.
 """
 function dateticks!(
@@ -118,6 +118,15 @@ function dateticks!(
     return numdates, strdates
 end
 
+"""
+    dateticks!(
+        ax = current_axis(),
+        dates::AbstractArray{Date} = [Date(2001, 1):Month(12):Date(2050, 1)...];
+        step::DatePeriod = Month(12),
+        format::AbstractString = "u-yyyy",
+    )
+Sets the current (or specified) axis to be DateTime with given steps and format.
+"""
 function dateticks!(
         ax = current_axis(),
         dates::AbstractArray{Date} = [Date(2001, 1):Month(12):Date(2050, 1)...];
