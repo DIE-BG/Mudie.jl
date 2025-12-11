@@ -25,4 +25,10 @@ include("plots/makie_utils.jl")
 export annotate_lines!
 include("plots/annotation_utils.jl")
 
+# Defining __init__ to set locale on module load
+function __init__()
+    # Set the locale in Dates module
+    return Dates.LOCALES["spanish"] = SPANISH_GT
+end
+
 end
