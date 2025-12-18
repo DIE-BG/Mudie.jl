@@ -87,7 +87,7 @@ function tslines!(
         kwargs...,
     )
     # Set date ticks if not already set
-    dateticks!(ax, dates)
+    dateticks!(ax, first(dates):last(dates))
     return l
 end
 
@@ -96,22 +96,40 @@ end
 """
     dateticks!(
         ax = current_axis(),
-        dates::AbstractArray{<:Date} = Date(2001, 1):Month(12):Date(2050, 1);
+        dates::StepRange{Date, R};
         step::DatePeriod = Month(12),
         format::AbstractString = "u-yyyy",
-    )
+    ) where {R <: DatePeriod}
 Sets the current (or specified) axis to be DateTime with given steps and format.
 """
 function dateticks!(
-        ax = current_axis(),
-        dates::AbstractArray{<:Date} = Date(2001, 1):Month(12):Date(2050, 1);
+        ax,
+        dates::StepRange{Date, R};
         step::DatePeriod = Month(12),
         format::AbstractString = "u-yyyy",
-    )
+    ) where {R <: DatePeriod}
     # Create dates for the X-axis
     date_ticks = first(dates):step:last(dates)
-    numdates = datetime2rata.(date_ticks)
-    strdates = Dates.format.(date_ticks, format, locale = "spanish")
+    dateticks!(ax, collect(date_ticks); format)
+end
+
+"""
+    dateticks!(
+        ax = current_axis(),
+        dates::AbstractArray{Date} = [Date(2001, 1):Month(12):Date(2050, 1)...];
+        format::AbstractString = "u-yyyy",
+    )
+Sets the current (or specified) axis to be DateTime with given date ticks (they
+can be unevenly spaced) and format.
+"""
+function dateticks!(
+        ax = current_axis(),
+        dates::AbstractArray{Date} = [Date(2001, 1):Month(12):Date(2050, 1)...];
+        format::AbstractString = "u-yyyy"
+    )
+    # Create dates for the X-axis
+    numdates = datetime2rata.(dates)
+    strdates = Dates.format.(dates, format, locale = "spanish")
     # Set them for the current axis
     ax.xticks = (numdates, strdates)
     ax.xticklabelrotation = π / 4
