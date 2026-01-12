@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.3.0] – 2025-12
+
+### Added
+
+-   New `die_theme_tex_font` a theme with TeX fonts.
+
 ## [0.2.0] – 2025-12
 
 ### Added
