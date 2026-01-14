@@ -1,10 +1,16 @@
 # Change Log
 
-## [0.2.1] – 2026-1
+## [0.3.1] – 2026-1
 
 ### Changed
 
 - Updated Makie versions in Project.toml for compatibility and improvements.
+
+## [0.3.0] – 2025-12
+
+### Added
+
+-   New `die_theme_tex_font` a theme with TeX fonts.
 
 ## [0.2.0] – 2025-12
 
