@@ -14,7 +14,7 @@ WONG_COLORS = Makie.wong_colors()
 
 A Makie theme for DIE plots with specific fonts and styles.
 """
-die_theme_tex_font = Makie.Theme(
+die_theme_texfonts = Makie.Theme(
     size=(950, 750),
     fontsize=18,
     grid=true,

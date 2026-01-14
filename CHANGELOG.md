@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.3.1] – 2026-1
+
+### Changed
+
+- Updated Makie versions in Project.toml for compatibility and improvements.
+
 ## [0.3.0] – 2025-12
 
 ### Added

@@ -16,10 +16,10 @@ export SPANISH_GT
 include("locale.jl")
 
 # Export makie theme
-export die_theme_tex_font
-include("themes/die_theme_tex_font.jl")
 export die_theme
+export die_theme_texfonts
 include("themes/initial_die_theme.jl")
+include("themes/die_theme_tex_font.jl")
 
 # Plotting utilities
 export tslines, tslines!, dateticks!, dateszoom!
