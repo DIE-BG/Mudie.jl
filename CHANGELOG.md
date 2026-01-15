@@ -1,5 +1,12 @@
 # Change Log
 
+
+## [0.4.0] – 2026-1
+
+### Added
+
+- `quarterlyticks!(ax, dates)` function to set xticks to a `2001Q1` format.  
+
 ## [0.3.1] – 2026-1
 
 ### Changed
