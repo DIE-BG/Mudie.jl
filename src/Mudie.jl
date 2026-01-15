@@ -24,6 +24,8 @@ include("themes/die_theme_tex_font.jl")
 # Plotting utilities
 export tslines, tslines!, dateticks!, dateszoom!
 include("plots/makie_utils.jl")
+export quarterlyticks!
+include("plots/quarterly_utils.jl")
 export annotate_lines!
 include("plots/annotation_utils.jl")
 
